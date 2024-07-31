@@ -1,0 +1,31 @@
+.btn{
+    padding: 10px;
+    margin: 10px;
+  }
+  .example-container {
+    height: 100vh;
+  }
+  
+  mat-sidenav {
+    width: 200px;
+  }
+  
+  mat-sidenav .mat-nav-list .mat-list-item {
+    padding: 0;
+  }
+  
+  mat-sidenav .mat-nav-list .mat-list-item button {
+    width: 100%;
+    text-align: left;
+  }
+  
+  mat-sidenav-content {
+    padding: 10px;
+  }
+  
+  button.mat-icon-button {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+  }
+  

@@ -1,0 +1,22 @@
+<mat-sidenav-container class="example-container">
+    <mat-sidenav #sidenav mode="side" [(opened)]="opened">
+      <mat-nav-list>
+        <mat-list-item>
+          <button mat-button routerLink="country" routerLinkActive="active">Country</button>
+        </mat-list-item>
+        <mat-list-item>
+          <button mat-button routerLink="state" routerLinkActive="active">State</button>
+        </mat-list-item>
+        <mat-list-item>
+          <button mat-button routerLink="city" routerLinkActive="active">City</button>
+        </mat-list-item>
+      </mat-nav-list>
+    </mat-sidenav>
+    <mat-sidenav-content>
+      <button mat-icon-button (click)="sidenav.toggle()">
+        <mat-icon>{{ sidenav.opened ? 'menu_open' : 'menu' }}</mat-icon>
+      </button>
+      <router-outlet></router-outlet>
+    </mat-sidenav-content>
+  </mat-sidenav-container>
+  

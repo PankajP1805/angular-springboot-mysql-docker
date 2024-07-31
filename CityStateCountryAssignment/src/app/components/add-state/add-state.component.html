@@ -1,0 +1,45 @@
+<div class="container-fluid" style="background-color: rgb(233, 247, 233);">
+  <div class="header">
+    <h4 class="modal-title">State Details</h4>
+  </div>
+  <div class="modal-body">
+    <form #stateForm="ngForm" (ngSubmit)="save()">
+      <div class="row mb-3">
+        <label for="country" class="col-sm-3 col-form-label">Country</label>
+        <div class="col-sm-9 select-dropdown">
+          <select class="form-control" id="country" [(ngModel)]="countryId" name="countryId" required>
+            <option *ngFor="let country of countries" [value]="country.id">{{country.countryName}}</option>
+          </select>
+          <div *ngIf="stateForm.submitted && !countryId" class="invalid-feedback d-block">
+            Country is required.
+          </div>
+        </div>
+      </div>
+      <div class="row mb-3">
+        <label for="stateName" class="col-sm-3 col-form-label">State Name</label>
+        <div class="col-sm-9">
+          <input type="text" class="form-control" id="stateName" [(ngModel)]="stateName" name="stateName" required>
+          <div *ngIf="stateForm.submitted && !stateName" class="invalid-feedback d-block">
+            State Name is required.
+          </div>
+        </div>
+
+      </div>
+      <div class="row mb-3">
+        <label for="statePopulation" class="col-sm-3 col-form-label">State Population</label>
+        <div class="col-sm-9">
+          <input type="number" class="form-control" id="statePopulation" [(ngModel)]="statePopulation"
+            name="statePopulation" placeholder="Enter Population in Crores" required>
+          <div *ngIf="stateForm.submitted && !statePopulation" class="invalid-feedback d-block">
+            State Population is required.
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" (click)="close()">Close</button>
+        <button type="submit" class="btn btn-primary">Save</button>
+      </div>
+    </form>
+  </div>
+
+</div>

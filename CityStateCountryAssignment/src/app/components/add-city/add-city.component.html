@@ -1,0 +1,53 @@
+<div class="container-fluid" style="background-color: rgb(233, 247, 233);">
+  <div class="header">
+    <h4 class="modal-title">City Details</h4>
+  </div>
+  <div class="modal-body">
+    <form #cityForm="ngForm" (ngSubmit)="save()" >
+      <div class="row mb-3">
+        <label for="country" class="col-sm-3 col-form-label">Country</label>
+        <div class="col-sm-9 select-dropdown">
+          <select class="form-control" id="country" [(ngModel)]="countryId" name="countryId" (change)="fetchAssociatedStates()" required>
+            <option *ngFor="let country of countries" [value]="country.id">{{country.countryName}}</option>
+          </select>
+          <div *ngIf="cityForm.submitted && !countryId" class="invalid-feedback d-block">
+            Country is required.
+          </div>
+        </div>
+      </div>
+      <div class="row mb-3">
+        <label for="state" class="col-sm-3 col-form-label">State</label>
+        <div class="col-sm-9 select-dropdown">
+          <select class="form-control" id="state" [(ngModel)]="stateId" name="stateId" (change)="fetchAssociatedCountry()" required>
+            <option *ngFor="let state of states" [value]="state.id">{{state.stateName}}</option>
+          </select>
+          <div *ngIf="cityForm.submitted && !stateId" class="invalid-feedback d-block">
+            State is required.
+          </div>
+        </div>
+      </div>
+      <div class="row mb-3">
+        <label for="cityName" class="col-sm-3 col-form-label">City Name</label>
+        <div class="col-sm-9">
+          <input type="text" class="form-control" id="cityName" [(ngModel)]="cityName" name="cityName" required>
+          <div *ngIf="cityForm.submitted && !cityName" class="invalid-feedback d-block">
+            City Name is required.
+          </div>
+        </div>
+      </div>
+      <div class="row mb-3">
+        <label for="cityPopulation" class="col-sm-3 col-form-label">City Population</label>
+        <div class="col-sm-9">
+          <input type="number" class="form-control" id="cityPopulation" [(ngModel)]="cityPopulation" name="cityPopulation" placeholder="Enter Population in Lakhs" required>
+          <div *ngIf="cityForm.submitted && !cityPopulation" class="invalid-feedback d-block">
+            City Population is required.
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" (click)="close()">Close</button>
+        <button type="submit" class="btn btn-primary">Save</button>
+      </div>
+    </form>
+  </div>
+</div>

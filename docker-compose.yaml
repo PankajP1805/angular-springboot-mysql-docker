@@ -1,0 +1,37 @@
+version: "3"
+
+volumes:
+  dbdata:
+
+services:
+  mysqldb:
+    image: mysql:8.0.33
+    environment:
+      - MYSQL_DATABASE=petclinic
+    env_file:
+      - ./mysql.env
+    volumes:
+      - dbdata:/var/lib/mysql
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      retries: 10
+      interval: 3s
+      timeout: 30s
+
+  backend:
+    build:
+      context: ./CountryStateCityAssigngment
+    env_file: ./mysql.env
+    ports:
+      - "8080:8080"
+    depends_on:
+      mysqldb:
+        condition: service_healthy
+
+  frontend:
+    build: 
+      context: ./CityStateCountryAssignment
+    ports:
+      - "4200:4200"
+    depends_on:
+      - backend

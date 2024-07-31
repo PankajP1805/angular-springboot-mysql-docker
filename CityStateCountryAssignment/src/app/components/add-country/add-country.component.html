@@ -1,0 +1,35 @@
+<div class="container-fluid" style="background-color: rgb(233, 247, 233);">
+  <div class="header">
+    <h4 class="modal-title">Country Details</h4>
+  </div>
+  <div class="modal-body">
+    <form #countryForm="ngForm" (ngSubmit)="save()">
+      <div class="row mb-3">
+        <label for="countryName" class="col-sm-3 col-form-label">Country Name</label>
+        <div class="col-sm-9">
+          <input type="text" class="form-control" id="countryName" [(ngModel)]="countryName" name="countryName"
+            required>
+          <div *ngIf="countryForm.submitted && !countryName" class="invalid-feedback d-block">
+            Country Name is required.
+          </div>
+        </div>
+      </div>
+      <div class="row mb-3">
+        <label for="countryPopulation" class="col-sm-3 col-form-label">Country Population</label>
+        <div class="col-sm-9">
+          <input type="number" class="form-control" id="countryPopulation" [(ngModel)]="countryPopulation"
+            name="countryPopulation" placeholder="Enter Population in Crores" required>
+          <div *ngIf="countryForm.submitted && !countryPopulation" class="invalid-feedback d-block">
+            Country Population is required.
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" (click)="close()">Close</button>
+        <button type="submit" class="btn btn-primary">Save</button>
+      </div>
+
+    </form>
+  </div>
+
+</div>

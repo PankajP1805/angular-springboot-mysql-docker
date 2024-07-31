@@ -1,0 +1,64 @@
+<div class="top-bar">
+  <nav class="navbar">
+    <div class="container-fluid">
+      <span class="navbar-brand mb-0 h1">City List</span>
+      <form class="d-flex">
+        <button class="btn btn-primary mt-3" (click)="openAddCityModal()" data-bs-toggle="tooltip" data-bs-placement="top" title="Add a new city">Add City</button>
+      </form>
+    </div>
+  </nav>
+</div>
+<div class="container">
+  <table class="table table-bordered table-hover table-sm">
+    <thead>
+      <tr>
+        <th>Country Name</th>
+        <th>State Name</th>
+        <th>City Name</th>
+        <th>City Population</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let city of cities; let i = index">
+        <td data-bs-toggle="tooltip" data-bs-placement="top" title="{{ city.country.countryName }}">
+          <a [routerLink]="['/country']" class="form-control form-control-sm">
+            {{ city.country.countryName }}
+          </a>
+        </td>
+        <td data-bs-toggle="tooltip" data-bs-placement="top" title="{{ city.state.stateName }}">
+          <a [routerLink]="['/state']" class="form-control form-control-sm">
+            {{ city.state.stateName }}
+          </a>
+        </td>
+        <td data-bs-toggle="tooltip" data-bs-placement="top" title="{{ city.cityName }}">
+          <input class="form-control form-control-sm" [readOnly]="!city.editable" [(ngModel)]="city.cityName">
+        </td>
+        <td data-bs-toggle="tooltip" data-bs-placement="top" title="{{ city.cityPopulation + ' Lakhs' }}">
+          <div class="input-group">
+            <input class="form-control form-control-sm" 
+                   [readOnly]="!city.editable" 
+                   [(ngModel)]="city.cityPopulation"
+                   [type]="city.editable ? 'number' : 'text'">
+            <span class="input-group-append population-suffix"> Lakhs</span>
+          </div>
+        </td>
+        <td>
+          <div *ngIf="!city.editable" class="action-buttons">
+            <button class="btn btn-outline-primary" (click)="editCity(i)" data-bs-toggle="tooltip" data-bs-placement="top" title="Edit City">
+              <i class="bi bi-pencil"></i>
+            </button>
+            <button class="btn btn-outline-danger" (click)="deleteCity(city.id)" data-bs-toggle="tooltip" data-bs-placement="top" title="Delete City">
+              <i class="bi bi-trash"></i>
+            </button>
+          </div>
+          <div *ngIf="city.editable" class="action-buttons">
+            <button class="btn btn-outline-success" (click)="saveCity(i)" data-bs-toggle="tooltip" data-bs-placement="top" title="Save Changes">
+              <i class="bi bi-check-lg"></i>
+            </button>
+          </div>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
